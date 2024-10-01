@@ -1,4 +1,4 @@
-import { faker } from '@faker-js/faker';
+/*import { faker } from '@faker-js/faker';
 import Employee from '../interfaces/Employee';
 
 export function createRandomEmployee():Employee {
@@ -17,4 +17,4 @@ export function createRandomEmployee():Employee {
 
 export const employeeFaker = faker.helpers.multiple(createRandomEmployee, {
   count: 10,
-});
+});*/

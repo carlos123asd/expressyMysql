@@ -2,12 +2,7 @@ import { Request,Response } from "express"
 import {Router} from 'express'
 import validateToken from '../middleware/validateToken'
 //Servicios
-import sgetBookings from "../services/booking/getBookings"
-import sgetAbooking from "../services/booking/getBooking"
-import snewBooking from "../services/booking/newBooking"
-import sputBooking from "../services/booking/putBooking"
-import sdeleteBooking from "../services/booking/deleteBooking"
-import { Bookings } from "../models/modelBooking"
+import { BookingModel } from "../models/modelBooking"
 
 
 const routerBooking = Router()
@@ -15,7 +10,7 @@ const routerBooking = Router()
 //Booking
 //Conseguir todos los datos de Booking
 const getAllbookings = async (req:Request, res:Response) => {
-    const bookings = await sgetBookings() //service
+    const bookings = await BookingModel.getBookings()//service
     if(bookings){
         return res.status(200).json(bookings)
     }else{
@@ -25,7 +20,7 @@ const getAllbookings = async (req:Request, res:Response) => {
 //Conseguir un Booking
 const getBooking = async (req:Request, res:Response) => {
     const {id} = req.params
-    const booking = await sgetAbooking(id)
+    const booking = await BookingModel.getBooking(id)
     if(booking){
         return res.status(200).json(booking)
     }else{
@@ -35,21 +30,20 @@ const getBooking = async (req:Request, res:Response) => {
 //Nuevo Booking
 const postBooking = async (req:Request, res:Response) => {
     const {body} = req
-    const newBooking = await snewBooking(body)
+    const newBooking = await BookingModel.newBooking(body)
     res.status(201).json(newBooking)
 }
 //Edit/Update Booking
 const putBooking = async (req:Request, res:Response) => {
     const {body} = req
-    console.log(body)
     const {id} = req.params
-    const updateBooking = await sputBooking(id,body)
+    const updateBooking = await BookingModel.putBooking(id,body)
     res.status(200).json(updateBooking)
 }
 //Remove Booking 
 const deleteBooking = async (req:Request, res:Response) => {
     const {id} = req.params
-    const deleteBooking = await sdeleteBooking(id)
+    const deleteBooking = await BookingModel.deleteBooking(id)
     res.status(200).json(deleteBooking)
 }
 //Room

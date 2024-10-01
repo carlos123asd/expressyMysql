@@ -3,16 +3,12 @@ import {Router} from 'express'
 import validateToken from '../middleware/validateToken'
 const routerUser = Router()
 //Servicios
-import sgetUsers from "../services/user/getUsers"
-import sgetAUser from "../services/user/getUser"
-import snewUser from "../services/user/newUser"
-import sputUser from "../services/user/putUser"
-import sdeleteUser from "../services/user/deleteUser"
+import { UserModel } from "../models/modelEmployee"
 
 //Users
 //Conseguir todos los datos de Users
 const getAllusers = async (req:Request, res:Response) => {
-    const users = await sgetUsers()
+    const users = await UserModel.getUsers()
     if(users){
         return res.status(200).json(users)
     }else{
@@ -22,7 +18,7 @@ const getAllusers = async (req:Request, res:Response) => {
 //Conseguir un User
 const getUser = async (req:Request, res:Response) => {
     const {id} = req.params
-    const user = await sgetAUser(id)
+    const user = await UserModel.getUser(id)
     if(user){
         return res.status(200).json(user)
     }else{
@@ -32,20 +28,20 @@ const getUser = async (req:Request, res:Response) => {
 //Nuevo User
 const postUser = async (req:Request, res:Response) => {
     const {body} = req
-    const newUser = await snewUser(body)
+    const newUser = await UserModel.newUser(body)
     return res.status(201).json(newUser)
 }
 //Edit/Update User
 const putUser = async (req:Request, res:Response) => {
     const {body} = req
     const {id} = req.params
-    const updateUser = await sputUser(id,body)
+    const updateUser = await UserModel.putUser(id,body)
     return res.status(200).json(updateUser)
 }
 //Remove User 
 const deleteUser = async (req:Request, res:Response) => {
     const {id} = req.params
-    const deleteRoom = await sdeleteUser(id)
+    const deleteRoom = await UserModel.deleteUser(id)
     res.status(200).json({deleteRoom})
 }
 

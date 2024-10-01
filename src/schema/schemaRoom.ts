@@ -1,16 +1,38 @@
-import {Schema} from 'mongoose'
-import Room from '../interfaces/Room'
+export const createTableRooms = `
+    create table IF NOT EXISTS rooms (
+        idRoom int auto_increment primary key,
+        roomNumber int CHECK (roomNumber between 1000 and 9999) not null,
+        typeRoom ENUM('Double Superior','Suite','Double Bed','Single Bed') NOT NULL,
+        description TEXT not null,
+        offer BOOLEAN not null,
+        price TEXT not null,
+        discount INT not null,
+        cancellation TEXT not null,
+        status ENUM("Booked","Available") NOT NULL
+    );
+`
+export const createPhotosRoom = `
+    create table IF NOT EXISTS photosRoom (
+        idPhoto INT auto_increment primary key,
+        uri TEXT not null,
+        idRoom INT not null,
+        FOREIGN KEY(idRoom) REFERENCES rooms(idRoom) ON DELETE CASCADE
+    );
+`
 
+export const createAmenities = `
+    create table IF NOT EXISTS amenities (
+        idAmenitie INT auto_increment primary key,
+        name varchar(20)
+    );
+`
 
-export const roomSchema = new Schema<Room>({
-    roomNumber: {type: Number, required: true},
-    photo: {type: [String], required: true},
-    typeRoom: {type: String, required: true},
-    description: {type: String, required: false},
-    offer: {type: Boolean, required: false},
-    price: {type: String, required: true},
-    discount: {type: Number, required: true},
-    cancellation: {type: String, required: true},
-    status: {type: String, required: true},
-    amenities: {type: [String], required: true}
-})
+export const createAmenities_Rooms = `
+    create table IF NOT EXISTS amenities_rooms (
+        idAmenitie INT,
+        idRoom INT,
+        primary key (idAmenitie,idRoom),
+        foreign key (idAmenitie) REFERENCES amenities(idAmenitie) ON DELETE CASCADE,
+        foreign key (idRoom) REFERENCES rooms(idRoom) ON DELETE CASCADE
+    );
+`

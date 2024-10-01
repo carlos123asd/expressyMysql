@@ -1,4 +1,4 @@
-import { faker } from '@faker-js/faker';
+/*import { faker } from '@faker-js/faker';
 import Message from '../interfaces/Message';
 
 export function createRandomMessage():Message {
@@ -16,4 +16,4 @@ export function createRandomMessage():Message {
 
 export const messageFaker = faker.helpers.multiple(createRandomMessage, {
   count: 10,
-});
+});*/

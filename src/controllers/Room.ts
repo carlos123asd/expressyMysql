@@ -2,18 +2,14 @@ import { Request,Response } from "express"
 import validateToken from '../middleware/validateToken'
 import {Router} from 'express'
 //Servicios
-import sgetRooms from "../services/room/getRooms"
-import sgetARoom from "../services/room/getRoom"
-import snewRoom from "../services/room/newRoom"
-import sputRoom from "../services/room/putRoom"
-import sdeleteRoom from "../services/room/deleteRoom"
+import { RoomModel } from "../models/modelRoom"
 
 const routerRoom = Router()
 
 //Room
 //Conseguir todos los datos de room
 const getAllrooms = async (req:Request, res:Response) => {
-    const rooms = await sgetRooms()
+    const rooms = await RoomModel.getRooms()
     if(rooms){
         return res.status(200).json(rooms)
     }else{
@@ -23,7 +19,7 @@ const getAllrooms = async (req:Request, res:Response) => {
 //Conseguir un room
 const getRoom = async (req:Request, res:Response) => {
     const {id} = req.params
-    const room = await sgetARoom(id)
+    const room = await RoomModel.getRoom(id)
     if(room){
         return res.status(200).json(room)
     }else{
@@ -33,20 +29,20 @@ const getRoom = async (req:Request, res:Response) => {
 //Nuevo Room
 const postRoom = async (req:Request, res:Response) => {
     const {body} = req
-    const newRoom = await snewRoom(body)
+    const newRoom = await RoomModel.newRoom(body)
     return res.status(201).json(newRoom)
 }
 //Edit/Update Room
 const putRoom = async (req:Request, res:Response) => {
     const {body} = req
     const {id} = req.params
-    const updateRoom = await sputRoom(id,body)
+    const updateRoom = await RoomModel.putRoom(id,body)
     return res.status(200).json(updateRoom)
 }
 //Remove Room 
 const deleteRoom = async (req:Request, res:Response) => {
     const {id} = req.params
-    const deleteRoom = await sdeleteRoom(id)
+    const deleteRoom = await RoomModel.deleteRoom(id)
     return res.status(200).json(deleteRoom)
 }
 //Room

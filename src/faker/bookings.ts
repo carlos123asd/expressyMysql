@@ -1,4 +1,4 @@
-import { faker } from '@faker-js/faker';
+/*import { faker } from '@faker-js/faker';
 import Booking from '../interfaces/Booking';
 
 export function createRandomBooking():Booking {
@@ -20,4 +20,4 @@ export function createRandomBooking():Booking {
 
 export const bookingFaker = faker.helpers.multiple(createRandomBooking, {
   count: 10,
-});
+});*/

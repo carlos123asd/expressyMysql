@@ -1,5 +1,5 @@
 export default interface Message{
-    _id:string
+    idMessage:string
     date:Date
     customer:string
     email:string

@@ -3,17 +3,13 @@ import validateToken from '../middleware/validateToken'
 import {Router} from 'express'
 
 //Servicios
-import sgetMessages from "../services/message/getMessages"
-import sgetAMessage from "../services/message/getMessage"
-import snewMessage from "../services/message/newMessage"
-import sputMessage from "../services/message/putMessage"
-import sdeleteMessage from "../services/message/deleteMessage"
+import { MessageModel } from "../models/modelMessage"
 
 const routerMessage = Router()
 //Message
 //Conseguir todos los datos de Message
 const getAllmessage = async (req:Request, res:Response) => {
-    const message = await sgetMessages()
+    const message = await MessageModel.getMessages()
     if(message){
         return res.status(200).json(message)
     }else{
@@ -23,7 +19,7 @@ const getAllmessage = async (req:Request, res:Response) => {
 //Conseguir un Message
 const getMessage = async (req:Request, res:Response) => {
     const {id} = req.params
-    const message = await sgetAMessage(id)
+    const message = await MessageModel.getMessage(id)
     if(message){
         return res.status(200).json(message)
     }else{
@@ -33,20 +29,20 @@ const getMessage = async (req:Request, res:Response) => {
 //Nuevo Message
 const postMessage = async (req:Request, res:Response) => {
     const {body} = req
-    const newMessage = await snewMessage(body)
+    const newMessage = await MessageModel.newMessage(body)
     res.status(201).json(newMessage)
 }
 //Edit/Update Message
 const putMessage = async (req:Request, res:Response) => {
     const {body} = req
     const {id} = req.params
-    const updateMessage = await sputMessage(id,body)
+    const updateMessage = await MessageModel.putMessage(id,body)
     res.status(200).json(updateMessage)
 }
 //Remove Message 
 const deleteMessage = async (req:Request, res:Response) => {
     const {id} = req.params
-    const deleteMessage = await sdeleteMessage(id)
+    const deleteMessage = await MessageModel.deleteMessage(id)
     res.status(200).json(deleteMessage)
 }
 

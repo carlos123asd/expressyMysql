@@ -1,5 +1,5 @@
 export default interface Room{
-    _id:string
+    idRoom:string
     roomNumber:number
     photo:string[]
     typeRoom:string
