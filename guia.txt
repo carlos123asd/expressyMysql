@@ -1,0 +1,96 @@
+Estructura de carpetas
+/controllers: los controladores (juntos con las rutas) de cada parte de la aplicación
+/services: los servicios que obtienen datos (fetchAll(), fetchOne() etc…)
+/interfaces: los interfaces de TS de cada dato
+/validators: los validadores de los inputs de la aplicación 
+/middleware: la función que se usa para comprobar si el usuario está logueado
+
+
+
+app.get('/',(req:Request, res:Response) => {
+    res.send('Inicio')
+})
+//Room
+//Conseguir all datos de room
+app.get('/room', (req:Request, res:Response) => {
+    res.send('Get Rooms')
+})
+//Conseguir all datos de room
+app.get('/room/:id', (req:Request, res:Response) => {
+    res.send('Get a Room')
+    console.log(req.params)
+})
+//Nuevo Room
+app.post('/room/add', (req:Request, res:Response) => {
+    res.send('New Room')
+})
+//Edit/Update Room
+app.put('/room/edit/:id', (req:Request, res:Response) => {
+    res.send('Edit Room')
+    res.send(req.params)
+})
+//Remove Room 
+app.delete('/room/delete/:id', (req:Request, res:Response) => {
+    res.send('Remove Room')
+    res.send(req.params)
+})
+
+//Booking
+app.get('/bookings', (req:Request, res:Response) => {
+    res.send('Get Bookings')
+})
+app.get('/bookings/:id', (req:Request, res:Response) => {
+    res.send('Get a Booking')
+    res.send(req.params)
+})
+app.post('/bookings/add', (req:Request, res:Response) => {
+    res.send('New Booking')
+})
+app.put('/bookings/edit/:id', (req:Request, res:Response) => {
+    res.send('Edit Booking')
+    res.send(req.params)
+})
+app.delete('/bookings/delete/:id', (req:Request, res:Response) => {
+    res.send('Delete Booking')
+    res.send(req.params)
+})
+
+//User
+app.get('/users', (req:Request, res:Response) => {
+    res.send('Get users')
+})
+app.get('/users/:id', (req:Request, res:Response) => {
+    res.send('Get a users')
+    res.send(req.params)
+})
+app.post('/users/add', (req:Request, res:Response) => {
+    res.send('New User')
+})
+app.put('/users/edit/:id', (req:Request, res:Response) => {
+    res.send('Edit User')
+    res.send(req.params)
+})
+app.delete('users/delete/:id', (req:Request, res:Response) => {
+    res.send('Delete User')
+    res.send(req.params)
+})
+
+//Message
+app.get('/contact', (req:Request, res:Response) => {
+    res.send('Get Mesagges')
+})
+app.get('/contact/:id', (req:Request, res:Response) => {
+    res.send('Get a Mesagges')
+    res.send(req.params)
+})
+app.post('/contact/add', (req:Request, res:Response) => {
+    res.send('New Message')
+})
+app.put('/contact/edit/:id', (req:Request, res:Response) => {
+    res.send('Edit Message')
+    res.send(req.params)
+})
+app.delete('/contact/delete/:id', (req:Request, res:Response) => {
+    res.send('Delete Message')
+    res.send(req.params)
+})
