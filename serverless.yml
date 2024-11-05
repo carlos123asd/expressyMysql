@@ -1,0 +1,18 @@
+service: MirandaBackendFunction
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: eu-west-3
+
+functions:
+  app:
+    handler: build/index.handler  # Debe coincidir con la estructura de tu proyecto
+    events:
+      - http:
+          path: /
+          method: get
+      - http:
+          path: rooms
+          method: get
+      # Puedes agregar más rutas aquí
