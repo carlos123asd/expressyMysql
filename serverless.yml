@@ -7,7 +7,7 @@ provider:
 
 functions:
   app:
-    handler: build/index.handler  # Debe coincidir con la estructura de tu proyecto
+    handler: build/index.handler
     events:
       - http:
           path: /
