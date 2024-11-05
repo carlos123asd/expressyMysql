@@ -1,0 +1,40 @@
+name: Deploy Backend to AWS Lambda
+
+on:
+  push:
+    branches:
+      - main  
+  workflow_dispatch:  
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env: 
+        FORCE_JAVASCRIPT_ACTIONS_TO_NODE20: true
+    steps:
+    - name: Check out the repository
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'
+
+    - name: Install Serverless Framework
+      run: npm install -g serverless
+
+    - name: Configure AWS credentials
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      run: echo "AWS credentials configured"
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Deploy to AWS Lambda with Serverless
+      run: serverless deploy --stage production
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_REGION: ${{ secrets.AWS_REGION }}
