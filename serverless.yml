@@ -15,4 +15,4 @@ functions:
       - http:
           path: rooms
           method: get
-      # Puedes agregar más rutas aquí
+      #Agregamos más rutas aquí

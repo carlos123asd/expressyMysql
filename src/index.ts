@@ -15,7 +15,7 @@ import serverless from 'serverless-http';
 dotenv.config();
 
 const app: Application = express();
-const port = process.env.PORT || "3000";
+//const port = process.env.PORT || "3000"; //LOCAL
 const apiPaths = {
     rooms: '/rooms',
     bookings: '/bookings',
@@ -50,16 +50,13 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 const startServer = async () => {
     try {
         await connectDB();
-        app.listen(port, () => console.log(`Server listening on port ${port}`));
+        //app.listen(port, () => console.log(`Server listening on port ${port}`)); //LOCAL
     } catch (error) {
         console.error(error);
         process.exit(1);
     }
 };
 
-// Verifica si está en un entorno de Lambda o en local
-if (process.env.IS_OFFLINE) {
-    startServer();
-}
+startServer();
 
 export const handler = serverless(app);  //adaptador de serverless para Lambda
