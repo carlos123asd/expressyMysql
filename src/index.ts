@@ -59,4 +59,4 @@ const startServer = async () => {
 
 startServer();
 
-export const handler = serverless(app);  //adaptador de serverless para Lambda
+export const handler = serverless(app);   //adaptador de serverless para Lambda
