@@ -28,11 +28,11 @@ app.use(cors());
 app.use(express.json());
 
 /* Ruta de inicio */
-app.get('/', (req, res) => {
+/*app.get('/', (req, res) => {
     res.send({
         msg: "Login"
     });
-});
+});*/
 
 // Rutas de autenticación
 app.use('/auth', routerAuth);
