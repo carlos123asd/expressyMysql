@@ -16,3 +16,9 @@ functions:
       - http:
           path: "{myproxy+}"
           method: any
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - Authorization
+            allowCredentials: true
