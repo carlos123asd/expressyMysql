@@ -8,11 +8,11 @@ provider:
 functions:
   app:
     handler: build/index.handler
-    events:
-      - http:
-          path: /
-          method: get
-      - http:
-          path: rooms
-          method: get
+    ##events:
+      #- http:
+          #path: /
+          #method: get
+      #- http:
+          #path: rooms
+          #method: get
       #Agregamos más rutas aquí
