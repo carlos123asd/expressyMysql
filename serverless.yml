@@ -1,4 +1,4 @@
-service: MirandaBackendFunction
+service: APIMirandaBackendFunction
 
 provider:
   name: aws
