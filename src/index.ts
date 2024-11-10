@@ -30,7 +30,7 @@ app.use(express.json());
 /* Ruta de inicio */
 app.get('/', (req, res) => {
     res.send({
-         msg: "Wellcome API Miranda"
+        msg: "Wellcome API Miranda"
     });
 });
 
