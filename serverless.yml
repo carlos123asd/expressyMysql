@@ -21,7 +21,7 @@ functions:
             headers: 
               - Content-Type
               - Authorization
-            allowCredentials: true
+            allowCredentials: false
       - http:
           path: "{myproxy+}"
           method: any
