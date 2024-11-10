@@ -4,15 +4,15 @@ provider:
   name: aws
   runtime: nodejs20.x
   region: eu-west-3
+  state: v1
 
 functions:
   app:
     handler: build/index.handler
-    ##events:
-      #- http:
-          #path: /
-          #method: get
-      #- http:
-          #path: rooms
-          #method: get
-      #Agregamos más rutas aquí
+    events:
+      - http:
+          path: /
+          method: get
+      - http:
+          path: {myproxy+}
+          method: any
