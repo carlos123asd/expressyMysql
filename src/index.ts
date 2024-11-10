@@ -24,11 +24,7 @@ const apiPaths = {
 };
 
 /* Configuración de CORS */
-app.use(cors({
-    origin: "http://localhost:5173",
-    methods: ["GET","POST","PUT","DELETE"],
-    allowedHeaders: ["Content-Type","Authorization"]
-}));
+app.use(cors());
 app.use(express.json());
 
 /* Ruta de inicio */
