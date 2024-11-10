@@ -27,6 +27,6 @@ functions:
           cors:
             origin: '*'
             headers:
-              - Content-Type
-              - Authorization
+               - Content-Type
+               - Authorization
             allowCredentials: true
