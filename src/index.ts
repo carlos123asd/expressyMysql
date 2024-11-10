@@ -24,7 +24,11 @@ const apiPaths = {
 };
 
 /* Configuración de CORS */
-app.use(cors());
+app.use(cors({
+    origin: "http://localhost:5173",
+    methods: ["GET","POST","PUT","DELETE"],
+    allowedHeaders: ["Content-Type","Authorization"]
+}));
 app.use(express.json());
 
 /* Ruta de inicio */
@@ -36,7 +40,6 @@ app.use(express.json());
 
 // Rutas de autenticación
 app.use('/auth', routerAuth);
-
 // Rutas generales de la API
 app.use(apiPaths.rooms, routerRoom);
 app.use(apiPaths.bookings, routerBooking);
