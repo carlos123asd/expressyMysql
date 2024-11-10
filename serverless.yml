@@ -1,4 +1,4 @@
-service: APIMirandaBackendFunction
+service: APIMirandaBackend
 
 provider:
   name: aws
@@ -12,4 +12,21 @@ functions:
       - http:
           path: /
           method: get
-      
+      - http:
+          path: /auth
+          method: any
+          cors:
+            origin: '*'
+            headers: 
+              - Content-Type
+              - Authorization
+            allowCredentials: false
+      - http:
+          path: "{myproxy+}"
+          method: any
+          cors:
+            origin: '*'
+            headers:
+               - Content-Type
+               - Authorization
+            allowCredentials: true
