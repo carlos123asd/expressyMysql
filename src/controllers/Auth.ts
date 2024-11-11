@@ -21,6 +21,8 @@ async function authenticate (req:Request, res:Response) {
       return res.status(400).json({message: 'User not found'})
     }else{
       const user = userFound as Employee[];
+      console.log('ini',password);
+      console.log('comp',user[0].password);
       const isAuth = await bcrypt.compare(password,user[0].password)
       if(!isAuth){
         return res.status(400).json({message: 'Password Incorrect'})
