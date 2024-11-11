@@ -8,7 +8,6 @@ import Employee from '../interfaces/Employee';
 const routerAuth = Router()
 
 async function authenticate (req:Request, res:Response) {
-  console.log(req.body);
   const {email,password} = req.body
   if(!email || !password){
       return res.status(400).json({message: 'Username and password are required'})
@@ -21,10 +20,7 @@ async function authenticate (req:Request, res:Response) {
       return res.status(400).json({message: 'User not found'})
     }else{
       const user = userFound as Employee[];
-      console.log('ini',password);
-      console.log('comp',user[0].password);
       const isAuth = await bcrypt.compare(password,user[0].password)
-      console.log('res',isAuth);
       if(!isAuth){
         return res.status(400).json({message: 'Password Incorrect'})
       }else{

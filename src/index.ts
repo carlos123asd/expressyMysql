@@ -11,6 +11,7 @@ import routerMessage from './controllers/Message';
 import routerUser from './controllers/User';
 import routerAuth from './controllers/Auth';
 import serverless from 'serverless-http';
+import { bufferToJSONMiddleware } from './middleware/bufferToJSONMiddleware';
 
 dotenv.config();
 
@@ -27,24 +28,7 @@ const apiPaths = {
 app.use(cors());
 app.use(express.json());
 
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Credentials', 'true');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-    next();
-})
 
-const bufferToJSONMiddleware = (req: express.Request, res: express.Response, next: express.NextFunction) => {
-	if (req.body.length > 0 && req.body instanceof Buffer) {
-        try {
-            req.body = JSON.parse(req.body.toString());
-        } catch (err) {
-            return res.status(400).json({ body: req.body, length: req.body.length, error: 'Invalid JSON data' });
-        }
-	}
-	next();
-};
 app.use(bufferToJSONMiddleware);
 
 /* Ruta de inicio */
