@@ -8,6 +8,7 @@ import Employee from '../interfaces/Employee';
 const routerAuth = Router()
 
 async function authenticate (req:Request, res:Response) {
+  console.log(req.body);
   const {email,password} = req.body
   if(!email || !password){
       return res.status(400).json({message: 'Username and password are required'})
