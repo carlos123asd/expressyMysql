@@ -58,7 +58,9 @@ export class RoomModel {
                 LEFT JOIN
                     amenities a ON ar.amenity_id = a.id
                 WHERE
-                    r.id = ?;`
+                    r.id = ?;
+                GROUP BY
+                    r.id;`
                 ,[id]
             );
             return room;
