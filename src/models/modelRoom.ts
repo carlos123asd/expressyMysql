@@ -38,29 +38,11 @@ export class RoomModel {
         try{
             const room = await con.execute(
                 `SELECT
-                r.id,
-                r.room_number,
-                r.type_room,
-                r.description,
-                r.offer,
-                r.price,
-                r.discount,
-                r.cancellation,
-                r.status,
-                GROUP_CONCAT(DISTINCT p.uri ORDER BY p.uri SEPARATOR ', ') AS photos,
-                GROUP_CONCAT(DISTINCT a.name ORDER BY a.name SEPARATOR ', ') AS amenities
+                *
                 FROM
-                    rooms r
-                LEFT JOIN
-                    photos p ON r.id = p.room_id
-                LEFT JOIN
-                    amenity_room ar ON r.id = ar.room_id
-                LEFT JOIN
-                    amenities a ON ar.amenity_id = a.id
+                    rooms
                 WHERE
-                    r.id = ?;
-                GROUP BY
-                    r.id;`
+                    id = ?;`
                 ,[id]
             );
             return room;
