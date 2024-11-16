@@ -19,7 +19,7 @@ export class BookingModel {
         const con = await connectDB()
         try{
             const booking = await con.execute(
-                'DELETE * FROM bookings WHERE idBooking = ?',[id]
+                'DELETE * FROM bookings WHERE id = ?',[id]
             );
         }catch(error){
             console.error(error)
@@ -29,8 +29,13 @@ export class BookingModel {
     static async getBooking(id:string){
         const con = await connectDB()
         try{
-            const booking = await con.execute(
-                'SELECT * FROM bookings WHERE idBooking = ?',[id]
+            const booking = await con.execute(  
+            `SELECT *
+                FROM
+                    bookings
+                WHERE
+                    id = ?;`
+                ,[id]
             );
             return booking;
         }catch(error){
@@ -42,7 +47,7 @@ export class BookingModel {
         const con = await connectDB()
         try{
             const booking = await con.execute(
-                'SELECT * FROM bookings'
+                `SELECT * FROM bookings;`
             );
             return booking;
         }catch(error){
@@ -57,7 +62,7 @@ export class BookingModel {
             const values = Object.values(dateUpdate);
             values.push(id);
             con.execute( 
-                `UPDATE bookings SET ${fields.join(', ')} WHERE idBooking = ?`,values
+                `UPDATE bookings SET ${fields.join(', ')} WHERE id = ?`,values
             )
         }catch(error){
             console.error(error)
@@ -69,7 +74,7 @@ export class BookingModel {
         const values = Object.values(booking);
         try{
             const newbooking = await con.execute(
-                'INSERT INTO bookings (guest,orderDate,checkin,timein,checkout,timeout,ordertime,specialRequest,roomType,status,idRoom) VALUES (?)',values
+                'INSERT INTO bookings (guest,orderdate,checkin,checkout,specialrequest,room_id,status) VALUES (?)',values
             );
         }catch(error){
             console.error(error)
