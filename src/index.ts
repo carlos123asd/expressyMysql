@@ -16,7 +16,7 @@ import { bufferToJSONMiddleware } from './middleware/bufferToJSONMiddleware';
 dotenv.config();
 
 const app: Application = express();
-//const port = process.env.PORT || "3000"; //LOCAL
+const port = process.env.PORT || "3000"; //LOCAL
 const apiPaths = {
     rooms: '/rooms',
     bookings: '/bookings',
@@ -52,6 +52,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 /* Función para iniciar la conexión a la base de datos y el servidor */
 const startServer = async () => {
     try {
+        app.listen(port,()=>console.log("API on port 3000"))
         await connectDB();
         //app.listen(port, () => console.log(`Server listening on port ${port}`)); //LOCAL
     } catch (error) {
@@ -62,4 +63,4 @@ const startServer = async () => {
 
 startServer();
 
-export const handler = serverless(app);   //adaptador de serverless para Lambda
+//export const handler = serverless(app);   //adaptador de serverless para Lambda
