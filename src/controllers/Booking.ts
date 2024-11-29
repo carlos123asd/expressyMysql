@@ -46,6 +46,16 @@ const deleteBooking = async (req:Request, res:Response) => {
     const deleteBooking = await BookingModel.deleteBooking(id)
     res.status(200).json(deleteBooking)
 }
+//Get Gains Year
+const getGainsYear = async (req:Request, res:Response) => {
+    const getGains = await BookingModel.sumGains()
+    try {
+        res.status(200).json(getGains)
+    } catch (error) {
+        console.error("getGainsYear",error)
+        res.status(400).json(getGains)
+    }
+}
 //Room
 //Conseguir all datos de room
 routerBooking.get('/booking',validateToken,getAllbookings)
@@ -57,5 +67,7 @@ routerBooking.post('/booking/add',validateToken,postBooking)
 routerBooking.put('/booking/edit/:id',validateToken,putBooking)
 //Remove Room 
 routerBooking.delete('/booking/delete/:id',validateToken,deleteBooking)
+//Gains of Year
+routerBooking.get('/booking/gains',validateToken,getGainsYear)
 
 export default routerBooking
