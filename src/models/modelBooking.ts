@@ -80,4 +80,28 @@ export class BookingModel {
             console.error(error)
         }
     }
+    //SUM GAINS BOOKINGS
+    static async sumGains(){
+        const con = await connectDB()
+        try {
+            const gains = await con.execute(
+              `
+                SELECT 
+                    SUM(datediff(b.checkout,b.checkin) * r.price) as gains
+                from 
+                    bookings b
+                join 
+                    rooms r
+                on
+                    b.room_id = r.id
+                WHERE 
+                YEAR(b.checkin) <= YEAR(CURDATE()) 
+                AND YEAR(b.checkout) >= YEAR(CURDATE()); 
+              `  
+            );
+            return gains;
+        } catch (error) {
+            console.error(error)
+        }
+    }
 }
