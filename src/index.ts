@@ -12,6 +12,7 @@ import routerUser from './controllers/User';
 import routerAuth from './controllers/Auth';
 import serverless from 'serverless-http';
 import { bufferToJSONMiddleware } from './middleware/bufferToJSONMiddleware';
+import { bufferToJSONResMiddleware } from './middleware/bufferToJSONResMiddleware';
 
 dotenv.config();
 
@@ -28,8 +29,9 @@ const apiPaths = {
 app.use(cors());
 app.use(express.json());
 
-
+//Middleware buffer to json RES Y REQ
 app.use(bufferToJSONMiddleware);
+app.use(bufferToJSONResMiddleware);
 
 /* Ruta de inicio */
 app.get('/', (req, res) => {
