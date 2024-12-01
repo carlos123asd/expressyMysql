@@ -10,7 +10,7 @@ const routerBooking = Router()
 //Booking
 //Conseguir todos los datos de Booking
 const getAllbookings = async (req:Request, res:Response) => {
-    const bookings = await BookingModel.getBookings()//service
+    const bookings = await BookingModel.getBookings()
     if(bookings){
         return res.status(200).json(bookings)
     }else{
@@ -47,15 +47,19 @@ const deleteBooking = async (req:Request, res:Response) => {
     res.status(200).json(deleteBooking)
 }
 //Get Gains Year
-const getGainsYear = async (req:Request, res:Response) => {
-    const getGains = await BookingModel.sumGains()
+const getGainsYear = async (req: Request, res: Response) => {
     try {
-        res.status(200).json(getGains)
+        const getGains = await BookingModel.sumGains();
+        if (getGains) {
+            res.status(200).json(getGains);
+        } else {
+            res.status(404).json({ message: "No se encontraron ganancias para este año" });
+        }
     } catch (error) {
-        console.error("getGainsYear",error)
-        res.status(400).json(getGains)
+        console.error("Error en getGainsYear:", error);
+        res.status(500).json({ message: "Error al obtener ganancias" });
     }
-}
+};
 //Room
 //Conseguir all datos de room
 routerBooking.get('/booking',validateToken,getAllbookings)

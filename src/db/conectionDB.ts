@@ -11,6 +11,8 @@ export const connectDB = async (): Promise<Connection> => {
       database: process.env.DB_NAME,
       port: Number(process.env.DB_PORT) || 3306,
       connectTimeout: 10000,
+      charset: 'utf8mb4', // Configura el charset para evitar buffers innecesarios
+      rowsAsArray: false,
     });
     console.log('Conectado a la base de datos MYSQL');
   }
