@@ -72,6 +72,6 @@ routerBooking.put('/booking/edit/:id',validateToken,putBooking)
 //Remove Room 
 routerBooking.delete('/booking/delete/:id',validateToken,deleteBooking)
 //Gains of Year
-routerBooking.get('/booking/gains',validateToken,getGainsYear)
+routerBooking.get('/gains',validateToken,getGainsYear)
 
 export default routerBooking
