@@ -104,4 +104,31 @@ export class BookingModel {
             console.error(error)
         }
     }
+    //SUM GAINS FOR MONTH ON CURRENT YEAR
+    static async sumGainsMonthYear(){
+        const con = await connectDB()
+        try {
+           const res = await con.execute(`
+                SELECT 
+                    MONTH(b.orderdate) AS month,
+                    SUM(DATEDIFF(b.checkout, b.checkin) * r.price) AS gains
+                FROM 
+                    bookings b
+                JOIN 
+                    rooms r
+                ON 
+                    b.room_id = r.id
+                WHERE 
+                    YEAR(b.checkin) <= YEAR(CURDATE())
+                    AND YEAR(b.checkout) >= YEAR(CURDATE())
+                GROUP BY 
+                    MONTH(b.orderdate)
+                ORDER BY 
+                    month;    
+            `);
+            return res;
+        } catch (error) {
+            console.error(error)
+        }
+    }
 }

@@ -60,6 +60,20 @@ const getGainsYear = async (req: Request, res: Response) => {
         res.status(500).json({ message: "Error al obtener ganancias" });
     }
 };
+//Get Gain for Month in Current Year
+const getGainsMonthCurrentYear = async (req:Request,res:Response) => {
+    try {
+        const getGainsByMonth = await BookingModel.sumGainsMonthYear();
+        if(getGainsByMonth){
+            res.status(200).json(getGainsByMonth);
+        }else{
+            res.status(404).json({message: "Profits for Current Year not Found"})
+        }
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({ message: "Error to get profits for current year" })
+    }
+}
 //Room
 //Conseguir all datos de room
 routerBooking.get('/booking',validateToken,getAllbookings)
@@ -73,5 +87,7 @@ routerBooking.put('/booking/edit/:id',validateToken,putBooking)
 routerBooking.delete('/booking/delete/:id',validateToken,deleteBooking)
 //Gains of Year
 routerBooking.get('/gains',validateToken,getGainsYear)
+//Gains for month on current year
+routerBooking.get('/gainMonthforYear',validateToken,getGainsMonthCurrentYear)
 
 export default routerBooking
