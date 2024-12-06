@@ -59,7 +59,7 @@ const getGainsYear = async (req: Request, res: Response) => {
         console.error("Error en getGainsYear:", error);
         res.status(500).json({ message: "Error al obtener ganancias" });
     }
-};
+}
 //Get Gain for Month in Current Year
 const getGainsMonthCurrentYear = async (req:Request,res:Response) => {
     try {
