@@ -25,7 +25,7 @@ export class RoomModel {
     const con = await connectDB()
         try{
             const room = await con.execute(
-                'DELETE * FROM rooms WHERE id = ?',[id]
+                'DELETE FROM rooms WHERE id = ?',[id]
             );
         }catch(error){
             console.error(error)

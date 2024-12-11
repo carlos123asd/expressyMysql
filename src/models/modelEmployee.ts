@@ -22,7 +22,7 @@ export class UserModel {
     const con = await connectDB()
         try{
             const user = await con.execute(
-                'DELETE * FROM users WHERE idUser = ?',[id]
+                'DELETE FROM users WHERE idUser = ?',[id]
             );
         }catch(error){
             console.error(error)

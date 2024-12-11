@@ -19,7 +19,7 @@ export class BookingModel {
         const con = await connectDB()
         try{
             const booking = await con.execute(
-                'DELETE * FROM bookings WHERE id = ?',[id]
+                'DELETE FROM bookings WHERE id = ?',[id]
             );
         }catch(error){
             console.error(error)

@@ -20,7 +20,7 @@ export class MessageModel {
     const con = await connectDB()
         try{
             const message = await con.execute(
-                'DELETE * FROM messages WHERE idMessage = ?',[id]
+                'DELETE FROM messages WHERE idMessage = ?',[id]
             );
         }catch(error){
             console.error(error)
