@@ -63,7 +63,7 @@ export class BookingModel {
             values.push(id);
             con.execute( 
                 `UPDATE bookings SET ${fields.join(', ')} WHERE id = ?`,values
-            )
+            );
         }catch(error){
             console.error(error)
         }
